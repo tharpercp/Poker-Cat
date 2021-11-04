@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link src="./styles/reset.css" rel="stylesheet"/>
+    <script src="./dist/main.js"></script>
+    <title>Cat Poker</title>
+    <link rel="stylesheet" href="./src/index.css">
+</head>
+
+<body>
+<!--     
+    <div class="splash">
+        <img src="./src/imgs/catpoker.JPG">
+        <button style="--slist: #ffda5f, #f9376b">♥♠ Start Game♦♣</button>
+        <h1>Poker Cat</h1>
+    </div> -->
+    <div id="catboss">
+        <img id="catboss" src="./src/imgs/catboss.jpg"/>
+    </div>
+    <div id="bosscards">
+        <img src="./src/imgs/cardback.png" class= "hole" id="boss"></img>
+        <img src="./src/imgs/cardback.png" class= "hole" id="boss"></img>
+    </div>
+
+    <div id="console">
+        <!-- <button class="start">START GAME</button> -->
+        <p id="starta"></p>
+        <p id="startb"></p>
+        <p id="startc"></p>
+        <button id="showFlop">Flop</button>
+        <button id="showTurn">Turn</button>
+        <button id="showRiver">River</button>
+    </div>
+    
+ 
+
+    <div id="communitycards">
+
+        
+        
+        <img src="./src/imgs/cardback.png" class= "com" id="flopa"></img>
+        <img src="./src/imgs/cardback.png" class= "com" id="flopb"></img>
+        <img src="./src/imgs/cardback.png" class= "com" id="flopc"></img>
+        <img src="./src/imgs/cardback.png" class= "com" id="turn"></img>
+        <img src="./src/imgs/cardback.png" class= "com" id="river"></img>
+        
+    
+
+    </div>
+    <div id="usercards">
+        <img id="cardone" src="./src/imgs/cardback.png"/>
+        <img id="cardtwo" src="./src/imgs/cardback.png"/>
+    </div>
+    <div id="buttons">
+        <button id="check">Check</button>
+        <button id="call" >Call</button>
+        <button id="chips"></button>
+        <label for="myRange">Raise Amount:</label>
+            <input id="myRange"/>
+        <button id="raise">Raise</button>
+        <button id="fold">Fold</button>
+        <form id="raiser">
+            <button>New Hand</button>
+        </form>
+    </div>
+</body>
+
+</html>

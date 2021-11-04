@@ -1,0 +1,138 @@
+/*!************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.css ***!
+  \************************************************************************************************************************************/
+#communitycards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+/* .splash {
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: black;
+    background-size: cover;
+    z-index: 200;
+    text-align: center;
+    line-height: 100vh;
+    color: white;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+} */
+/* .splash > button {
+    position: absolute;
+    margin-top: 200px;
+    font-size: large;
+
+} */
+/* img {
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    margin-top: 300px;
+} */
+#bosscards > img {
+  height: 200px;
+  width: 135px;
+  border: 5px solid black;
+  background-color: red;
+}
+
+.com {
+  flex-direction: row;
+  height: 175px;
+  width: 110px;
+  border: 5px solid black;
+}
+
+.usercards {
+  height: 200;
+  width: 135px;
+  justify-content: flex-end;
+}
+
+body {
+  /* background-image: url("./imgs/Background.jpg"); */
+  background-color: #e7e3e3;
+}
+
+#buttons {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 20px;
+}
+
+button {
+  padding: 30px;
+  margin-right: 5px;
+  margin-left: 5px;
+  background-color: grey;
+  font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#catboss {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 85px;
+}
+
+#bosscards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: -400px;
+  margin-right: 50px;
+}
+
+#usercards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+#cardone {
+  height: 250px;
+  width: 125px;
+  margin-top: 100px;
+  border: solid 5px black;
+}
+
+#cardtwo {
+  height: 250px;
+  width: 125px;
+  margin-top: 100px;
+  border: solid 5px black;
+}
+
+#console {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: xx-large;
+  align-content: center;
+  background-color: darkseagreen;
+  height: 600px;
+  width: 500px;
+  margin-left: 200px;
+  padding: 20px;
+  font-weight: 700;
+  border: solid 5px black;
+  border-radius: 10px 10px 10px 10px;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+}
