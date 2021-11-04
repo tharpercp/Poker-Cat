@@ -175,8 +175,8 @@ class Game{
           document.getElementById("startc").innerHTML="Boss Cat's Chips: " + `${this.computer.chips}`;
           document.getElementById("chips").innerHTML=`YOUR CHIPS: ${chips}`;
           let hand = this.user.hand;
-          document.getElementById("cardone").src=`./src/imgs/cards/${hand[0]}.JPG`;
-          document.getElementById("cardtwo").src=`./src/imgs/cards/${hand[1]}.JPG`;
+          document.getElementById("cardone").src=`./src/imgs/Cards/${hand[0]}.JPG`;
+          document.getElementById("cardtwo").src=`./src/imgs/Cards/${hand[1]}.JPG`;
         } else {
           this.announceWinner();
         }
