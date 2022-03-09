@@ -8,15 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
     
     
 
-    document.getElementById("call").addEventListener("click", myGame.call());
-    document.getElementById("check").addEventListener("click", myGame.check());
-    document.getElementById("fold").addEventListener("click", myGame.fold());
-    document.getElementById("showFlop").addEventListener("click", myGame.flop());
-    document.getElementById("showTurn").addEventListener("click", myGame.turn());
-    document.getElementById("showTurn").addEventListener("click", myGame.river());
-
-    myGame.playGame();
-
+    document.getElementById("call").addEventListener("click", () => myGame.call());
+    document.getElementById("check").addEventListener("click", () => myGame.check());
+    document.getElementById("fold").addEventListener("click", () => myGame.fold());
+    document.getElementById("start").addEventListener("click", () => myGame.playGame());
+    document.getElementById("myRange").addEventListener("click", () => myGame.showRaise());
 })
 
 

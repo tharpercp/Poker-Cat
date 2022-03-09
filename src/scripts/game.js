@@ -12,21 +12,11 @@ class Game{
         this.deck = Array.from(Array(53).keys()).slice(1)
         this.pot = 0;
         this.currentBlinds = 100;
-        this.user = new Player();
+        this.player = new Player();
         this.computer = new Computer(); 
         this.usedCards = [];
         this.communityCards = [];
-    }
-
-    
-    
-
-    switchTurn () {
-        if (this.turn === this.user) {
-            this.turn = this.computer;
-        } else {
-            this.turn = this.user;
-        }
+        this.status = 'Preflop';
     }
 
 
@@ -71,7 +61,7 @@ class Game{
 
     check() {
         if (this.user.investment !== this.computer.investment) {
-            document.getElementById("console").innerHTML="Must call the bet or raise"
+            document.getElementById("console").innerHTML="Must call the bet or raise";
         } else {
             this.computer.computerTurn();
         }
@@ -79,45 +69,69 @@ class Game{
 
 
 
-    nextAction () {
-        if (this.communityCards.length === 0) {
-            this.flop.bind(this);
-        } else if (this.communityCards.length === 3) {
-            this.turn.bind(this);
-        } else {
-            this.river.bind(this);
-        }
-    }
+    // nextAction () {
+    //     if (this.communityCards.length === 0) {
+    //         this.flop.bind(this);
+    //     } else if (this.communityCards.length === 3) {
+    //         this.turn.bind(this);
+    //     } else {
+    //         this.river.bind(this);
+    //     }
+    // }
 
     payBlinds() {
-        this.pot += (this.currentBlinds * 2)
-        this.user.chips -= this.currentBlinds
-        this.computer.chips -= this.currentBlinds
+        this.pot += (this.currentBlinds * 2);
+        this.player.chips -= this.currentBlinds;
+        this.computer.chips -= this.currentBlinds;
+        this.player.investment += this.currentBlinds;
+        this.computer.investment += this.currentBlinds;
     }
 
     preFlop() {
-        this.user.hand = (this.deal(2));
-        this.computer.hand = (this.deal(2));
+        if (this.status === "Preflop") {
+            this.status = "flop";
+            this.player.hand = (this.deal(2));
+            this.computer.hand = (this.deal(2));
+        } else {
+            return null;
+        }
     }
 
     flop(){
-        const flopArray = this.deal(3);
-        this.communityCards.concat(flopArray);
-        const flopa = document.getElementById("flopa").src="./src/imgs/Cards/" + `${flopArray[0]}` + ".JPG";
-        const flopb = document.getElementById("flopb").src="./src/imgs/Cards/" + `${flopArray[1]}` + ".JPG";
-        const flopc = document.getElementById("flopc").src="./src/imgs/Cards/" + `${flopArray[2]}` + ".JPG";
+
+        if (this.status === "flop") {
+            this.status = "turn";
+            const flopArray = this.deal(3);
+            this.communityCards.concat(flopArray);
+            document.getElementById("1").src="./src/imgs/Cards/" + `${flopArray[0]}` + ".JPG";
+            document.getElementById("2").src="./src/imgs/Cards/" + `${flopArray[1]}` + ".JPG";
+            document.getElementById("3").src="./src/imgs/Cards/" + `${flopArray[2]}` + ".JPG";
+        } else {
+            return null
+        }
     }
 
     turn() {
-        const turnCard = this.deal(1);
-        this.communityCards.concat(turnCard);
-        document.getElementById("turn").src ="./src/imgs/Cards/" + `${turnCard[0]}` + ".JPG";
+        if (this.status === "turn") {
+            this.status = "river";
+            const turnCard = this.deal(1);
+            this.communityCards.concat(turnCard);
+            document.getElementById("4").src ="./src/imgs/Cards/" + `${turnCard[0]}` + ".JPG";
+
+        } else {
+            return null;
+        }
     }
 
     river() {
-        const riverCard = this.deal(1)
-        this.communityCards.concat(riverCard)
-        document.getElementById("river").src ="./src/imgs/Cards/" + `${riverCard[0]}` + ".JPG";
+        if (this.status === "river") {
+            this.status = "preflop";
+            const riverCard = this.deal(1)
+            this.communityCards.concat(riverCard)
+            document.getElementById("5").src ="./src/imgs/Cards/" + `${riverCard[0]}` + ".JPG";
+        } else {
+            return null;
+        }
     }
 
     showDown() {
@@ -155,31 +169,38 @@ class Game{
     }
 
     call() {
-        let total = this.computer.investment - this.user.investment;
-        this.user.chips -= total;
+        let total = this.computer.investment - this.player.investment;
+        console.log(total);
+        this.player.chips -= total;
         this.pot += total
         if (this.communityCards.length === 5) {
             this.showDown();
         } else {
-            this.nextAction();
-            this.computer.computerTurn();
+            document.getElementById("console-header").innerHTML="Call"
+            const oldPot = this.pot;
+            this.pot = setTimeout(this.computer.computerTurn(oldPot - total, oldPot), 5000);
+            this.flop();
+            this.computer.computerTurn(this.pot);
         }
     }
     playGame(){
-        if (this.winner() > 0) {
+        const x = document.getElementById("splash-container");
+        if (x.style.display === "none") {
+            x.style.display = "flex";
+        } else {
+            x.style.display = "none";
+        }
           this.preFlop();
           this.payBlinds();
-          let chips = this.user.chips;
-          document.getElementById("starta").innerHTML="Your turn, make a move!";
-          document.getElementById("startb").innerHTML=`Current Pot: ${this.pot}`;
-          document.getElementById("startc").innerHTML="Boss Cat's Chips: " + `${this.computer.chips}`;
-          document.getElementById("chips").innerHTML=`YOUR CHIPS: ${chips}`;
-          let hand = this.user.hand;
+          let chips = this.player.chips;
+          document.getElementById("console-header").innerHTML="Welcome to poker cat! Everyone pays 100 in blinds, and you will start each hand. Good luck!";
+          document.getElementById("console-current-pot").innerHTML=`Current Pot: ${this.pot}`;
+          document.getElementById("console-boss-chips").innerHTML="Boss Cat's Chips: " + `${this.computer.chips}`;
+          document.getElementById("console-your-chips").innerHTML=`Your Chips: ${chips}`;
+          let hand = this.player.hand;
           document.getElementById("cardone").src="./src/imgs/Cards/" + `${hand[0]}` + ".JPG"
           document.getElementById("cardtwo").src="./src/imgs/Cards/" + `${hand[1]}` + ".JPG";
-        } else {
-          this.announceWinner();
-        }
+        
       }
 
     winner() {
@@ -192,12 +213,23 @@ class Game{
         }
     }
 
+    updateFrontendTotals () {
+        document.getElementById("console-boss-chips").innerHTML=this.computer.chips.toString();
+        document.getElementById("console-your-chips").innerHTML=this.player.chips.toString();
+        document.getElementById("console-current-pot").innerHTML=this.pot.toString();
+    }
+
     announceWinner() {
         if (this.winner() === 0){
             document.getElementById("console").innerHTML="You lose!";
         } else {
             document.getElementById("console").innerHTML="WINNER!!!";
         }
+    }
+
+    showRaise () {
+        const raiseAmount = document.getElementById("myRange").value;
+        document.getElementById("raise-amount").innerHTML=raiseAmount.toString();
     }
 }
 

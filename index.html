@@ -13,12 +13,12 @@
 </head>
 
 <body>
-<!--     
-    <div class="splash">
-        <img src="./src/imgs/catpoker.JPG">
-        <button style="--slist: #ffda5f, #f9376b">♥♠ Start Game♦♣</button>
-        <h1>Poker Cat</h1>
-    </div> -->
+    <div id="splash-container">
+        <h1 id="splash-title">Poker Cat</h1>
+        <p id="splash-description">Do you have what it takes to defeat the cat boss?</p>
+        <img id="splash" src="./src/imgs/catpoker.JPG" />
+        <button id="start" style="--slist: #ffda5f, #f9376b">♥♠ Start Game♦♣</button>
+    </div>
     <div id="catboss">
         <img id="catboss" src="./src/imgs/catboss.jpg"/>
     </div>
@@ -26,15 +26,9 @@
         <img src="./src/imgs/cardback.png" class= "hole" id="boss"></img>
         <img src="./src/imgs/cardback.png" class= "hole" id="boss"></img>
     </div>
-
+    <p id="console-current-pot"></p>
     <div id="console">
-        <!-- <button class="start">START GAME</button> -->
-        <p id="starta"></p>
-        <p id="startb"></p>
-        <p id="startc"></p>
-        <button id="showFlop">Flop</button>
-        <button id="showTurn">Turn</button>
-        <button id="showRiver">River</button>
+        <p id="console-header"></p>
     </div>
     
  
@@ -43,11 +37,11 @@
 
         
         
-        <img src="./src/imgs/cardback.png" class= "com" id="flopa"></img>
-        <img src="./src/imgs/cardback.png" class= "com" id="flopb"></img>
-        <img src="./src/imgs/cardback.png" class= "com" id="flopc"></img>
-        <img src="./src/imgs/cardback.png" class= "com" id="turn"></img>
-        <img src="./src/imgs/cardback.png" class= "com" id="river"></img>
+        <img src="./src/imgs/cardback.png" class= "com" id="1"></img>
+        <img src="./src/imgs/cardback.png" class= "com" id="2"></img>
+        <img src="./src/imgs/cardback.png" class= "com" id="3"></img>
+        <img src="./src/imgs/cardback.png" class= "com" id="4"></img>
+        <img src="./src/imgs/cardback.png" class= "com" id="5"></img>
         
     
 
@@ -56,17 +50,20 @@
         <img id="cardone" src="./src/imgs/cardback.png"/>
         <img id="cardtwo" src="./src/imgs/cardback.png"/>
     </div>
+    
     <div id="buttons">
         <button id="check">Check</button>
         <button id="call" >Call</button>
-        <button id="chips"></button>
-        <label for="myRange">Raise Amount:</label>
-            <input id="myRange"/>
+        <div id="raise-amount-container">
+            <label for="range" id="raise-amount">***</label>
+            <input type="range" id="myRange" name="range" min="0" max="10000">
+        </div>
         <button id="raise">Raise</button>
         <button id="fold">Fold</button>
-        <form id="raiser">
-            <button>New Hand</button>
-        </form>
+    </div>
+    <div id="chips-container">
+        <p id="console-boss-chips"></p>
+        <p id="console-your-chips"></p>
     </div>
 </body>
 

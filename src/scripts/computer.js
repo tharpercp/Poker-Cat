@@ -6,11 +6,10 @@ class Computer{
         this.investment = 0;
     }
 
-    computerTurn(investment, pot) {
-        if (investment === this.investment) {
+    computerTurn(pot) {
+        if (pot / 2 === this.investment) {
             let bet = pot / 2
             this.investment += (bet)
-            // this.game.pot += bet;
             this.chips -= (bet)
             this.switchTurn();
             pot += bet;
