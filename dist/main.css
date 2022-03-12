@@ -7,82 +7,54 @@
   \****************************************************************************************************************************************/
 #communitycards {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
+  min-height: 30vh;
   z-index: 2;
 }
 
-/* .splash {
-    display: flex;
-    position: fixed;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: black;
-    background-size: cover;
-    z-index: 200;
-    text-align: center;
-    line-height: 100vh;
-    color: white;
-    font-family: 'Trebuchet MS', Arial, sans-serif;
-} */
-/* .splash > button {
-    position: absolute;
-    margin-top: 200px;
-    font-size: large;
-
-} */
-/* img {
-    height: 150px;
-    width: 150px;
-    position: absolute;
-    margin-top: 300px;
-} */
 #bosscards > img {
+  height: 150px;
+  width: 85px;
+  border: 5px solid black;
+  background-color: red;
+}
+
+#buttons > button {
+  padding: 2.5vh;
+}
+
+.com {
   height: 200px;
   width: 135px;
   border: 5px solid black;
   background-color: red;
 }
 
-.com {
-  flex-direction: row;
-  height: 175px;
-  width: 110px;
-  border: 5px solid black;
-}
-
 .usercards {
   height: 200;
   width: 135px;
-  justify-content: flex-end;
 }
 
 body {
   /* background-image: url("./imgs/Background.jpg"); */
-  background-color: #e7e3e3;
+  background-color: #e7e7e7;
 }
 
 #buttons {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
-  margin-top: 20px;
+  padding: 5vh;
 }
 
 button {
-  padding: 30px;
-  margin-right: 5px;
-  margin-left: 5px;
-  background-color: grey;
+  margin: 2vh;
+  background-color: lightgreen;
   font-weight: 700;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  border-radius: 5px;
 }
 
 #catboss {
@@ -92,24 +64,24 @@ button {
   align-items: center;
   justify-content: center;
   margin-left: 10vh;
+  max-height: 30vh;
 }
 
 #bosscards {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
   z-index: 2;
-  margin: 0 auto;
-  margin-top: -35vh;
+  margin-top: -15vh;
+  margin-left: 7vh;
 }
 
 #usercards {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-end;
   z-index: 2;
+  margin-top: -5vh;
 }
 
 #cardone {
@@ -209,26 +181,47 @@ button {
 
 #console-current-pot {
   position: absolute;
-  top: 65%;
+  top: 55%;
   left: 46%;
   font-size: 20px;
-  background-color: antiquewhite;
+  background-color: white;
   border-radius: 5px;
   padding: 1vh;
   border: 1px solid black;
 }
 
 #console-boss-chips {
-  margin-top: 15vh;
+  margin-top: 5vh;
   padding: 5vh;
   border-radius: 5px;
-  background-color: antiquewhite;
+  background-color: white;
   box-shadow: silver 5px 5px 5px 5px;
+  width: 30vh;
 }
 
 #console-your-chips {
   padding: 5vh;
   border-radius: 5px;
   box-shadow: silver 5px 5px 5px 5px;
-  background-color: antiquewhite;
+  background-color: white;
+}
+
+#console-hand {
+  padding: 5vh;
+  border-radius: 5px;
+  box-shadow: silver 5px 5px 5px 5px;
+  background-color: white;
+}
+
+#raise-amount {
+  font-weight: 900;
+  text-align: center;
+  padding: 2vh;
+}
+
+#raise-amount-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

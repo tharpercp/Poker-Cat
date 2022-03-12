@@ -3,7 +3,7 @@ class Hand {
     //Straight Flush, 4-kind, full-house, flush,straight, 3-kind, two-pair, pair
     
     constructor(sevenCardHand) {
-        this.hand = findHand(sevenCardHand)
+        this.result = this.findHand(sevenCardHand);
     }
 
     findHand(cardInstances) {
@@ -11,18 +11,14 @@ class Hand {
         const straight = straightCheck(cardInstances);
         const pairs = pairsCheck(cardInstances);
         if (flush && straight) {
-            return 70;
-        } else if (pairs === "four of a kind" || "full house") {
+            return 80;
+        } else if (pairs > 0) {
             return pairs;
         } else if (flush) {
-            return 40;
+            return 50;
         } else if (straight) {
-            return 30; 
-        } else if (pairs) {
-            return pairs; 
-        } else {
-            return highCard(cardInstances);
-        }
+            return 40; 
+        } 
     }
 
     flushCheck(cardInstances) { 
@@ -57,7 +53,7 @@ class Hand {
     pairsCheck(cardInstances) {
         const pairs = {}
         for (let i = 0; i < 7; i++) {
-            let temp = cardInstances.filter((x) => x.value === cardInstances[i].value )
+            let temp = cardInstances.filter((card) => card.value === cardInstances[i].value )
             if (temp.length > 1) {
                 pairs[cardInstances[i].value] = temp.length;
             }
@@ -66,37 +62,31 @@ class Hand {
         pairsArr.sort();
         if (pairsArr.length < 2) {
             if (pairsArr[0] === 4){
-                return 60;
+                return 70;
             } else if (pairsArr[0] === 3) {
                 return 30;
-            } else {
-                return 20; 
+            } else if (pairsArr.length === 0) {
+                return 0;
+            } else if (pairsArr[0] === 2) {
+                return 20;
             }
         } else {
-            let trips = false; 
+            let pairs = 0;
+            let trips = false;
             for (let i = pairsArr.length - 1; i > 0; i--) {
-                if (pairsArr[i] === 4) {
-                    return 60; 
+                if (pairsArr[i] === 2) {
+                    pairs += 1; 
                 } else if (pairsArr[i] === 3) {
                     trips = true;
-                } else {
-                    if (trips = true) {
-                        return 50;
-                    } else {
-                        return 20 + (pairs[i] % 13);
-                    }
                 }
+    
+            }
+            if (trips === true && pairs > 0) {
+                return 60;
+            } else if (pairs > 1) {
+                return 25;
             }
         }
-    }
-
-    highCard(cardInstances) {
-        let arr = []
-        for (let i = 0; i < cardInstances.length; i++) {
-            arr.push(cardInstances[i].value)
-        }
-        arr.sort();
-        return arr[arr.length - 1] % 13;
     }
     
 }

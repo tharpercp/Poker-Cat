@@ -9,20 +9,18 @@ class Computer{
     computerTurn(pot) {
         if (pot / 2 === this.investment) {
             let bet = pot / 2
-            this.investment += (bet)
-            this.chips -= (bet)
+            this.investment += (bet);
+            this.chips -= (bet);
             this.switchTurn();
             pot += bet;
             return pot;
         } else {
             if (this.handStrength() > 0) {
-                let callAmount = investment - this.investment;
+                let callAmount = pot - this.investment;
                 this.chips -= callAmount;
-                if (document.getElementById("river").innerHTML !=="./src/imgs/cardback.png") {
-                    //showdown button 
-                } else {
-                    this.switchTurn();
-                }
+                return pot + callAmount;
+            } else {
+                return pot;
             }
         }
     }

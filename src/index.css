@@ -8,39 +8,6 @@
 }
 
 
-/* .splash {
-    display: flex;
-    position: fixed;
-    flex-direction: row;
-    align-content: center;
-    justify-content: center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: black;
-    background-size: cover;
-    z-index: 200;
-    text-align: center;
-    line-height: 100vh;
-    color: white;
-    font-family: 'Trebuchet MS', Arial, sans-serif;
-} */
-
-/* .splash > button {
-    position: absolute;
-    margin-top: 200px;
-    font-size: large;
-
-} */
-
-
-/* img {
-    height: 150px;
-    width: 150px;
-    position: absolute;
-    margin-top: 300px;
-} */
-
 
 #bosscards > img {
     height: 150px;
@@ -68,7 +35,7 @@
 
 body {
     /* background-image: url("./imgs/Background.jpg"); */
-    background-color: rgb(231, 227, 227);
+    background-color: rgb(231, 231, 231);
 }
 
 #buttons {
@@ -217,7 +184,7 @@ button {
     top: 55%;
     left: 46%;
     font-size: 20px;
-    background-color: antiquewhite;
+    background-color: white;
     border-radius: 5px;
     padding: 1vh;
     border: 1px solid black;
@@ -227,7 +194,7 @@ button {
     margin-top: 5vh;
     padding: 5vh;
     border-radius: 5px;
-    background-color: antiquewhite;
+    background-color: white;
     box-shadow: silver 5px 5px 5px 5px;
     width: 30vh;
 }
@@ -236,7 +203,14 @@ button {
     padding: 5vh;
     border-radius: 5px;
     box-shadow: silver 5px 5px 5px 5px;
-    background-color: antiquewhite;
+    background-color: white;
+}
+
+#console-hand {
+    padding: 5vh;
+    border-radius: 5px;
+    box-shadow: silver 5px 5px 5px 5px;
+    background-color: white;
 }
 
 #raise-amount {
