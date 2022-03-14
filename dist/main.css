@@ -63,7 +63,7 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-left: 10vh;
+  margin-left: 5vh;
   max-height: 30vh;
 }
 
@@ -73,7 +73,6 @@ button {
   justify-content: center;
   z-index: 2;
   margin-top: -15vh;
-  margin-left: 7vh;
 }
 
 #usercards {
@@ -109,7 +108,7 @@ button {
   flex-direction: column;
   font-size: 20px;
   align-content: center;
-  height: 60vh;
+  height: 30vh;
   width: 30vh;
   padding: 5vh;
   font-weight: 700;
@@ -176,7 +175,7 @@ button {
   font-size: 30px;
   align-content: center;
   background-color: transparent;
-  height: 75vh;
+  height: 60vh;
   width: 30vh;
   padding: 5vh;
   font-weight: 700;
@@ -187,41 +186,49 @@ button {
 
 #console-current-pot {
   position: absolute;
-  top: 54%;
-  left: 46%;
+  top: 28%;
+  left: 45%;
   font-size: 20px;
-  background-color: white;
+  background-color: lightgreen;
+  width: 15vh;
   border-radius: 5px;
   padding: 1vh;
-  border: 1px solid black;
+  border: 2px solid grey;
+  text-align: center;
 }
 
 #console-boss-chips {
   margin-top: 5vh;
   padding: 2vh;
   border-radius: 5px;
-  background-color: white;
-  box-shadow: silver 5px 5px 5px 5px;
+  background-color: lightgreen;
+  border: 2px solid grey;
   width: 30vh;
+  font-size: 20px;
+  text-align: center;
 }
 
 #console-your-chips {
   padding: 2vh;
   border-radius: 5px;
-  box-shadow: silver 5px 5px 5px 5px;
-  background-color: white;
+  border: 2px solid grey;
+  font-size: 20px;
+  text-align: center;
+  background-color: lightgreen;
 }
 
 #console-hand {
   position: absolute;
-  top: 82%;
-  left: 47%;
+  top: 52%;
+  left: 45%;
   font-size: 20px;
-  background-color: white;
+  background-color: lightgreen;
   border-radius: 5px;
   padding: 1vh;
-  border: 1px solid black;
+  border: 2px solid grey;
   z-index: 98;
+  width: 15vh;
+  text-align: center;
 }
 
 #raise-amount {

@@ -101,12 +101,12 @@ button {
     background-color: lightgreen;
     position: absolute;
     display: flex;
-    top: 5%;
+    top: 1%;
     left: 5%;
     flex-direction: column;
     font-size: 20px;
     align-content: center;
-    height: 60vh;
+    height: 20vh;
     width: 30vh;
     padding: 5vh;
     font-weight: 700;
@@ -175,7 +175,7 @@ button {
     font-size: 30px;
     align-content: center;
     background-color: transparent;
-    height: 60vh;
+    height: 70vh;
     width: 30vh;
     padding: 5vh;
     font-weight: 700;
