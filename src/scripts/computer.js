@@ -1,3 +1,6 @@
+import Hand from "./hand";
+import Player from "./player";
+
 class Computer{
 
     constructor() {
@@ -6,39 +9,51 @@ class Computer{
         this.investment = 0;
     }
 
-    computerTurn(pot) {
+    computerTurn(pot, investment, communityCards) {
         if (pot / 2 === this.investment) {
-            let bet = pot / 2
+            let bet = pot / 2;
             this.investment += (bet);
             this.chips -= (bet);
-            this.switchTurn();
             pot += bet;
             return pot;
         } else {
-            if (this.handStrength() > 0) {
-                let callAmount = pot - this.investment;
-                this.chips -= callAmount;
-                return pot + callAmount;
+            if (communityCards.length === 0) {
+                const amountToCall = investment - this.investment;
+                if (amountToCall > this.investment) {
+                    if (this.hand[0] % 13 === 0 || this.hand[1] % 13 === 0 || this.hand[0] === 1 || this.hand[1] === 1 || this.hand[0] === this.hand[1] || amountToCall < this.chips * 0.25) {
+                        let bet = amountToCall;
+                        this.investment += bet;
+                        this.chips -= bet;
+                        pot += bet;
+                        return pot;
+                    } else {
+                        return pot;
+                    }
+                }
             } else {
-                return pot;
+                const amountToCall = investment - this.investment;
+                const fullHand = [];
+                this.hand.forEach((card) => fullHand.push(card));
+                communityCards.forEach((card) => fullHand.push(card));
+                const handStrength = new Hand(fullHand)
+                if (handStrength.result > 20) {
+                    let bet = this.chips;
+                    this.investment += bet;
+                    this.chips -= bet;
+                    pot += bet;
+                    return pot;
+                } else if (handStrength.value === 20) {
+                    let bet = amountToCall;
+                    this.investment += bet;
+                    this.chips -= bet;
+                    pot += bet;
+                    return pot;
+                } else {
+                    return pot;
+                }
             }
-        }
-    }
 
-    switchTurn () {
-        document.getElementById("call").disabled = false;
-        document.getElementById("raise").disabled = false;
-        document.getElementById("fold").disabled = false;
-    }
-
-    handStrength () {
-        for (let i = 0; i < 2; i++) {
-            if (this.hand[i] % 13 === 1 || this.hand[i] % 13 > 11) {
-                return 1;
             }
-            return -1;
-        }
-
     }
 
 

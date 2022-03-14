@@ -27,7 +27,7 @@ class Game{
         this.deal = this.deal.bind(this);
     }
 
-    shuffleDeck(array) { //Fisher-Yates Shuffle Algo
+    shuffleDeck(array) { //Fisher-Yates Shuffle
         let currentIndex = array.length,  randomIndex;
       
         // While there remain elements to shuffle...
@@ -80,26 +80,101 @@ class Game{
         document.getElementById('fold').style.backgroundcolor = 'lightgreen';
     }
 
-    raise(amount) {
-        this.pot += amount;
+    raise(value) {
+        const amount = parseInt(value);
+        this.pot = amount + this.pot;
         this.player.chips -= amount;
         this.player.investment += amount;
         const oldPot = this.pot;
         this.switchToComp(); 
-        this.pot = this.computer.computerTurn();
-        if (this.pot === oldPot && this.status === 'River') {
-            this.showDown();
-        } else if (this.pot === oldPot && this.status !== 'River') {
+        this.pot = this.computer.computerTurn(this.pot, this.player.investment, this.communityCards);
+        this.updateFrontendTotals();
+        if (this.pot === oldPot) {
+            this.fold(1);
+            this.updateFrontendTotals();
+            this.pot = 0;
+            this.player.investment = 0;
+            this.computer.investment = 0;
+            this.player.hand = [];
+            this.computer.hand = [];
+            this.communityCards = [];
+            this.usedCards = [];
+            this.status = "";
+            this.playNextHand();
+            this.userTurn();
+        } else if (this.pot > oldPot && this.computer.investment === this.player.investment) {
+            document.getElementById("console").innerHTML += "<br />"  + "Boss cat calls.";
+            if (this.status === "river"|| this.player.chips === 0 || this.computer.chips === 0) {
+                this.updateFrontendTotals();
+                this.showDown();
+            } else {
+                const raiseAmount = this.computer.investment - this.player.investment;
+                this.updateFrontendTotals();
+                if (this.status === "" || this.status === "preflop") {
+                    if (raiseAmount > 0) {
+                        document.getElementById("console").innerHTML += "<br />" + `Boss cat re-raised you ${raiseAmount}. Raise, call, or fold?`;
+                        this.userTurn();
+                        this.flop();
+                    } else if (raiseAmount === 0) {
+                        document.getElementById("console").innerHTML += "<br />" + "Boss cat called. Your turn - Raise or check?";
+                        this.userTurn();
+                        this.flop();
+                    }
+                } else if (this.status === "flop") {
+                    if (raiseAmount > 0) {
+                        document.getElementById("console").innerHTML += "<br />" + `Boss cat re-raised you ${raiseAmount}. Raise, call, or fold?`;
+                        this.userTurn();
+                        this.turn();
+                    } else if (raiseAmount === 0) {
+                        document.getElementById("console").innerHTML += "<br />" + "Boss cat called. Your turn - Raise or check?";
+                        this.userTurn();
+                        this.turn();
+                    }
+                } else if (this.status === "turn"){
+                    if (raiseAmount > 0) {
+                        document.getElementById("console").innerHTML += "<br />" + `Boss cat raised you ${raiseAmount}. Raise, call, or fold?`;
+                        this.userTurn();
+                        this.river();
+                    } else if (raiseAmount === 0) {
+                        document.getElementById("console").innerHTML += "<br />" + "Boss cat called. Your turn - Raise or check?";
+                        this.userTurn();
+                        this.river();
+                    }
+                } else {
+                    return null;
+                }
+            }
 
         }
     }
 
     check() {
         if (this.player.investment !== this.computer.investment) {
-            document.getElementById("console").innerHTML="Must call the bet or raise";
+            document.getElementById("console").innerHTML += "<br />" + "Must call the bet or raise";
         } else {
-            document.getElementById("console").innerHTML="Check";
-            setTimeout(this.computer.computerTurn(), 5000);
+            document.getElementById("console").innerHTML += "<br />" + "Check";
+            const oldPot = this.pot;
+            this.pot = this.computer.computerTurn(this.pot, this.player.investment, this.communityCards);
+            const raiseAmount = this.pot - oldPot
+            if (raiseAmount > 0) {
+                document.getElementById("console").innerHTML += "<br />" + `Boss cat raised you ${raiseAmount} - call, raise, or fold?`
+                this.userTurn();
+            } else {
+                document.getElementById("console").innerHTML += "<br />" + `Boss cat checked as well - Raise or check?`
+                if (this.status === "") {
+                    this.userTurn();
+                    this.flop()
+                } else if (this.status === "flop") {
+                    this.userTurn();
+                    this.turn();
+                } else if (this.status === "turn") {
+                    this.userTurn();
+                    this.river();
+                } else if (this.status === "river") { 
+                    this.showDown();
+                    this.userTurn();
+                }
+            }
         }
     }
     
@@ -144,7 +219,7 @@ class Game{
             });
             if (cardValues[0] === cardValues[1]) {
                 const handName = hands[cardValues[0]]
-                document.getElementById("console-hand").innerHTML=`a pair of ${handName}`;
+                document.getElementById("console-hand").innerHTML=`a pair of ${handName}s`;
             } else {
                 if (cardValues.includes(1)) {
                     document.getElementById("console-hand").innerHTML=`Ace high`;
@@ -165,13 +240,11 @@ class Game{
             });
             const handInstance = new Hand(actualHand);
             const highHand = cardValues.sort((a,b)=>a-b);
-            console.log(highHand);
-            console.log(handInstance);
             if (handInstance.result === 20){
                 document.getElementById("console-hand").innerHTML=`One pair`
             }
             else if (handInstance.result === 25) {
-                document.getElementById("console-hand").innerHTML=`two pair - ${hands[highHand[highHand.length - 1]]}s and ${hands[highHand[0]]}s `;
+                document.getElementById("console-hand").innerHTML=`two pair`;
             } else if (handInstance.result === 30 || handInstance.result === 60 || handInstance.result === 70) {
                 document.getElementById("console-hand").innerHTML=`${hands[handInstance.result]}`;
             } else {
@@ -230,7 +303,7 @@ class Game{
         if (this.status === "flop") {
             this.status = "turn";
             const turnCard = this.deal(1);
-            this.communityCards.concat(turnCard);
+            this.communityCards.push(turnCard);
             document.getElementById("4").src ="./src/imgs/Cards/" + `${turnCard[0]}` + ".JPG";
 
         } else {
@@ -242,7 +315,7 @@ class Game{
         if (this.status === "turn") {
             this.status = "river";
             const riverCard = this.deal(1)
-            this.communityCards.concat(riverCard)
+            this.communityCards.push(riverCard)
             document.getElementById("5").src ="./src/imgs/Cards/" + `${riverCard[0]}` + ".JPG";
         } else {
             return null;
@@ -250,6 +323,32 @@ class Game{
     }
 
     showDown() {
+        console.log(this.communityCards);
+        const hands = {
+            0: "high hand",
+            1: "ace",
+            2: "two",
+            3: "three",
+            4: "four",
+            5: "five",
+            6: "six",
+            7: "seven",
+            8: "eight",
+            9: "nine",
+            10: "ten",
+            11: "jack",
+            12: "queen",
+            13: "king",
+            20: "pair",
+            25: "two-pair",
+            30: "three-of-a-kind",
+            40: "straight",
+            50: "flush",
+            60: "full-house",
+            70: "FOUR OF A KIND",
+            80: "STRAIGHT FLUSH"
+
+        };
         let userSevenCardHand = [];
         let compSevenCardHand = [];
         this.player.hand.forEach((card) => userSevenCardHand.push(card));
@@ -263,15 +362,26 @@ class Game{
         });
         const userHand = new Hand(userSevenCardHand);
         const compHand = new Hand(compSevenCardHand);
-        if (userHand > compHand) {
+        if (userHand.result > compHand.result) {
             this.player.chips += this.pot;
-            document.getElementById("console").innerHTML=`You win this hand! Pot size: ${this.pot}`;
-        } else if (userHand < compHand) {
-            document.getElementById("console").innerHTML=`You lose this hand! Pot size: ${this.pot}`;
+            document.getElementById("console").innerHTML += "<br />" +`You win this hand! ${hands[userHand.result]} vs. ${hands[compHand.result]} - Pot size: ${this.pot}`;
+        } else if (userHand.result < compHand.result) {
+            document.getElementById("console").innerHTML += "<br />" +`You lose this hand!${hands[userHand.result]} vs. ${hands[compHand.result]} - Pot size: ${this.pot}`;
             this.computer.chips += this.pot;
         } else {
-            this.player.chips += this.pot / 2;
-            this.computer.chips += this.pot / 2;
+            const playerHighCard = userSevenCardHand.reduce((partialSum, a) => partialSum + a, 0);
+            const computerHighCard = compSevenCardHand.reduce((partialSum, a) => partialSum + a, 0);
+            if (playerHighCard > computerHighCard) {
+                this.player.chips += this.pot;
+                document.getElementById("console").innerHTML += "<br />" +`You win this hand! ${hands[userHand.result]} vs. ${hands[compHand.result]} - Pot size: ${this.pot}`; 
+            } else if (computerHighCard > playerHighCard) {
+                document.getElementById("console").innerHTML += "<br />" +`You lose this hand!${hands[userHand.result]} vs. ${hands[compHand.result]} - Pot size: ${this.pot}`;
+                this.computer.chips += this.pot;
+            } else {
+                document.getElementById("console").innerHTML += "<br />" +`Tie! Split pot`;
+                this.computer.chips += this.pot / 2;
+                this.player.chips += this.pot / 2;
+            }
         }
         this.communityCards = [];
         this.usedCards = [];
@@ -280,18 +390,19 @@ class Game{
         this.computer.investment = 0;
         this.status = "";
         this.updateFrontendTotals();
-        setTimeout(this.playNextHand(), 5000);
+        this.playNextHand();
     }
 
-    fold(x=0) {
+    fold(x) {
         if (x === 1) {
             this.player.chips += this.pot
-            document.getElementById("console").innerHTML=`Boss cat folded, you win this hand! Pot size: ${this.pot}`;
-        } else {
-            document.getElementById("console").innerHTML=`Fold - Pot size: ${this.pot}`;
+            document.getElementById("console").innerHTML += "<br />" +`Boss cat folded, you win this hand! Pot size: ${this.pot}`;
+        } else if (x === 0) {
+            document.getElementById("console").innerHTML += "<br />" +`Fold - Pot size: ${this.pot}`;
             this.computer.chips += this.pot;
         }
         
+        this.updateFrontendTotals();
         this.pot = 0;
         this.player.investment = 0;
         this.computer.investment = 0;
@@ -312,37 +423,37 @@ class Game{
         if (this.status === "river"|| this.player.chips === 0 || this.computer.chips === 0) {
             this.showDown();
         } else {
-            document.getElementById("console").innerHTML="Call"
-            this.pot = this.computer.computerTurn(this.pot);
+            document.getElementById("console").innerHTML+="<br />" +"Call"
+            this.pot = this.computer.computerTurn(this.pot, this.investment, this.communityCards);
             this.updateFrontendTotals();
             const raiseAmount = this.pot - oldPot;
             if (this.status === "" || this.status === "preflop") {
                 if (raiseAmount > 0) {
-                    document.getElementById("console").innerHTML=`Boss cat raised you ${raiseAmount}. Raise, call, or fold?`;
+                    document.getElementById("console").innerHTML += "<br />" +`Boss cat raised you ${raiseAmount}. Raise, call, or fold?`;
                     this.userTurn();
                     this.flop();
                 } else if (raiseAmount === 0) {
-                    document.getElementById("console").innerHTML="Boss cat checked. Your turn - Raise or check?";
+                    document.getElementById("console").innerHTML += "<br />" +"Boss cat checked. Your turn - Raise or check?";
                     this.userTurn();
                     this.flop();
                 }
             } else if (this.status === "flop") {
                 if (raiseAmount > 0) {
-                    document.getElementById("console").innerHTML=`Boss cat raised you ${raiseAmount}. Raise, call, or fold?`;
+                    document.getElementById("console").innerHTML += "<br />" +`Boss cat raised you ${raiseAmount}. Raise, call, or fold?`;
                     this.userTurn();
                     this.turn();
                 } else if (raiseAmount === 0) {
-                    document.getElementById("console").innerHTML="Boss cat checked. Your turn - Raise or check?";
+                    document.getElementById("console").innerHTML += "Boss cat checked. Your turn - Raise or check?";
                     this.userTurn();
                     this.turn();
                 }
             } else if (this.status === "turn"){
                 if (raiseAmount > 0) {
-                    document.getElementById("console").innerHTML=`Boss cat raised you ${raiseAmount}. Raise, call, or fold?`;
+                    document.getElementById("console").innerHTML += "<br />" + `Boss cat raised you ${raiseAmount}. Raise, call, or fold?`;
                     this.userTurn();
                     this.river();
                 } else if (raiseAmount === 0) {
-                    document.getElementById("console").innerHTML="Boss cat checked. Your turn - Raise or check?";
+                    document.getElementById("console").innerHTML += "<br />" + "Boss cat checked. Your turn - Raise or check?";
                     this.userTurn();
                     this.river();
                 }
@@ -353,15 +464,17 @@ class Game{
 
     playGame(){
         const x = document.getElementById("splash-container");
+        const b = document.getElementById("body")
         if (x.style.display === "none") {
             x.style.display = "flex";
         } else {
             x.style.display = "none";
+            b.style.backgroundColor="rgb(231, 231, 231)";
         }
           this.preFlop();
           this.payBlinds();
-          let chips = this.player.chips;
           this.updateFrontendTotals();
+          document.getElementById("console").innerHTML="Welcome to Poker Cat! The blinds have been paid, and you will start each turn. Good luck!"
           let hand = this.player.hand;
           this.displayHand(hand);
           document.getElementById("cardone").src="./src/imgs/Cards/" + `${hand[0]}` + ".JPG"
@@ -386,16 +499,18 @@ class Game{
             document.getElementById("boss2").src="./src/imgs/cardback.png";
             document.getElementById("cardone").src="./src/imgs/Cards/" + `${hand[0]}` + ".JPG";
             document.getElementById("cardtwo").src="./src/imgs/Cards/" + `${hand[1]}` + ".JPG";
-            document.getElementById("console").innerHTML="Blinds have been paid, your turn - Raise or check/call.";
+            document.getElementById("console").innerHTML+="<br />" + "Blinds have been paid, your turn - Raise or check/call.";
         }
 
         
       }
 
     winner() {
-        if (this.player.chips === 0) {
+        if (this.player.chips <= 0) {
+            this.player.chips = 0;
             return -1;
-        } else if (this.computer.chips === 0){
+        } else if (this.computer.chips <= 0){
+            this.computer.chips = 0;
             return 0;
         } else {
             return 1;
@@ -413,9 +528,9 @@ class Game{
 
     announceWinner() {
         if (this.winner() === 0){
-            document.getElementById("console").innerHTML="You lose!";
-        } else {
             document.getElementById("console").innerHTML="WINNER!!!";
+        } else {
+            document.getElementById("console").innerHTML="You Lose!";
         }
     }
 

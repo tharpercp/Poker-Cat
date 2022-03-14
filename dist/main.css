@@ -39,7 +39,7 @@
 
 body {
   /* background-image: url("./imgs/Background.jpg"); */
-  background-color: #e7e7e7;
+  background-color: black;
 }
 
 #buttons {
@@ -101,21 +101,25 @@ button {
 }
 
 #console {
+  background-color: lightgreen;
   position: absolute;
   display: flex;
   top: 5%;
   left: 5%;
   flex-direction: column;
-  font-size: 30px;
+  font-size: 20px;
   align-content: center;
-  background-color: transparent;
-  height: 80vh;
+  height: 60vh;
   width: 30vh;
   padding: 5vh;
   font-weight: 700;
   border-radius: 5px;
   font-family: "Trebuchet MS", Arial, sans-serif;
   z-index: 1;
+  border: 2px solid grey;
+  overflow-y: auto;
+  overflow-x: hidden;
+  line-height: 200%;
 }
 
 #splash {
@@ -126,10 +130,12 @@ button {
 }
 
 #start {
-  width: 40vh;
+  width: 30vh;
   margin: 0 auto;
   font-size: 30px;
   border-radius: 5px;
+  margin-top: 5vh;
+  padding: 1vh;
   background: linear-gradient(yellow, green);
 }
 
@@ -138,7 +144,7 @@ button {
   width: 100%;
   height: 100%;
   background-color: black;
-  z-index: 99;
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -157,7 +163,7 @@ button {
   margin: 0 auto;
   padding: 1vh;
   font-family: "Montserrat";
-  font-size: 20px;
+  font-size: 30px;
 }
 
 #chips-container {
@@ -181,7 +187,7 @@ button {
 
 #console-current-pot {
   position: absolute;
-  top: 55%;
+  top: 54%;
   left: 46%;
   font-size: 20px;
   background-color: white;
@@ -192,7 +198,7 @@ button {
 
 #console-boss-chips {
   margin-top: 5vh;
-  padding: 5vh;
+  padding: 2vh;
   border-radius: 5px;
   background-color: white;
   box-shadow: silver 5px 5px 5px 5px;
@@ -200,17 +206,22 @@ button {
 }
 
 #console-your-chips {
-  padding: 5vh;
+  padding: 2vh;
   border-radius: 5px;
   box-shadow: silver 5px 5px 5px 5px;
   background-color: white;
 }
 
 #console-hand {
-  padding: 5vh;
-  border-radius: 5px;
-  box-shadow: silver 5px 5px 5px 5px;
+  position: absolute;
+  top: 82%;
+  left: 47%;
+  font-size: 20px;
   background-color: white;
+  border-radius: 5px;
+  padding: 1vh;
+  border: 1px solid black;
+  z-index: 98;
 }
 
 #raise-amount {

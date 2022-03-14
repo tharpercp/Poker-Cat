@@ -3,13 +3,11 @@ class Hand {
     //Straight Flush, 4-kind, full-house, flush,straight, 3-kind, two-pair, pair
     
     constructor(sevenCardHand) {
-        console.log(sevenCardHand);
         this.result = this.findHand(sevenCardHand);
     }
 
 
     findHand(cardInstances) {
-        console.log(cardInstances);
         const flush = this.flushCheck(cardInstances);
         const straight = this.straightCheck(cardInstances);
         const pairs = this.pairsCheck(cardInstances);
@@ -58,6 +56,7 @@ class Hand {
 
     straightCheck(cardInstances) {
         const check = this.cardValues(cardInstances).sort((a,b)=>a-b);
+        console.log(check);
         if (check[0] === 1) {
             check.push(14);
         }
@@ -73,6 +72,7 @@ class Hand {
                 }
             }
         }
+        console.log(inARow);
         if (inARow > 4) {
             return true;
         } else {
@@ -84,13 +84,10 @@ class Hand {
     pairsCheck(cardInstances) {
         const key = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0};
         const cardValues = this.cardValues(cardInstances);
-        console.log(cardValues)
         cardValues.forEach((card) => key[card] += 1)
         const counts = (Object.values(key));
         const pairsCount = counts.sort((a,b)=>a-b);
         const last = pairsCount.length - 1;
-        console.log(pairsCount);
-        console.log(pairsCount[last]);
             if (pairsCount[last] === 4){
                 return 70;
             } else if (pairsCount[last] === 3) {

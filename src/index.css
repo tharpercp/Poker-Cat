@@ -35,7 +35,7 @@
 
 body {
     /* background-image: url("./imgs/Background.jpg"); */
-    background-color: rgb(231, 231, 231);
+    background-color: black;
 }
 
 #buttons {
@@ -60,7 +60,7 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-left: 10vh;
+    margin-left: 5vh;
     max-height: 30vh;
 }
 
@@ -70,7 +70,6 @@ button {
     justify-content: center;
     z-index: 2;
     margin-top: -15vh;
-    margin-left: 7vh;
 
 }
 
@@ -99,21 +98,25 @@ button {
 }
 
 #console {
+    background-color: lightgreen;
     position: absolute;
     display: flex;
     top: 5%;
     left: 5%;
     flex-direction: column;
-    font-size: 30px;
+    font-size: 20px;
     align-content: center;
-    background-color: transparent;
-    height: 80vh;
+    height: 60vh;
     width: 30vh;
     padding: 5vh;
     font-weight: 700;
     border-radius: 5px;
     font-family: 'Trebuchet MS', Arial, sans-serif;
     z-index: 1;
+    border: 2px solid grey;
+    overflow-y: auto;
+    overflow-x: hidden;
+    line-height: 200%;
 }
 
 #splash {
@@ -124,10 +127,12 @@ button {
 }
 
 #start {
-    width: 40vh;
+    width: 30vh;
     margin: 0 auto;
     font-size: 30px;
     border-radius: 5px;
+    margin-top: 5vh;
+    padding: 1vh;
     background: linear-gradient(yellow, green);
 }
 
@@ -136,7 +141,7 @@ button {
     width: 100%;
     height: 100%;
     background-color: black;
-    z-index: 99;
+    z-index: 9999;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -157,7 +162,7 @@ button {
     margin: 0 auto;
     padding: 1vh;
     font-family: 'Montserrat';
-    font-size: 20px;
+    font-size: 30px;
 }
 
 #chips-container {
@@ -170,7 +175,7 @@ button {
     font-size: 30px;
     align-content: center;
     background-color: transparent;
-    height: 75vh;
+    height: 60vh;
     width: 30vh;
     padding: 5vh;
     font-weight: 700;
@@ -181,36 +186,49 @@ button {
 
 #console-current-pot {
     position: absolute;
-    top: 55%;
-    left: 46%;
+    top: 28%;
+    left: 45%;
     font-size: 20px;
-    background-color: white;
+    background-color: lightgreen;
+    width: 15vh;
     border-radius: 5px;
     padding: 1vh;
-    border: 1px solid black;
+    border: 2px solid grey;
+    text-align: center;
 }
 
 #console-boss-chips {
     margin-top: 5vh;
-    padding: 5vh;
+    padding: 2vh;
     border-radius: 5px;
-    background-color: white;
-    box-shadow: silver 5px 5px 5px 5px;
+    background-color: lightgreen;
+    border: 2px solid grey;
     width: 30vh;
+    font-size: 20px;
+    text-align: center;
 }
 
 #console-your-chips {
-    padding: 5vh;
+    padding: 2vh;
     border-radius: 5px;
-    box-shadow: silver 5px 5px 5px 5px;
-    background-color: white;
+    border: 2px solid grey;
+    font-size: 20px;
+    text-align: center;
+    background-color: lightgreen;
 }
 
 #console-hand {
-    padding: 5vh;
+    position: absolute;
+    top: 52%;
+    left: 45%;
+    font-size: 20px;
+    background-color: lightgreen;
     border-radius: 5px;
-    box-shadow: silver 5px 5px 5px 5px;
-    background-color: white;
+    padding: 1vh;
+    border: 2px solid grey;
+    z-index: 98;
+    width: 15vh;
+    text-align: center;
 }
 
 #raise-amount {
