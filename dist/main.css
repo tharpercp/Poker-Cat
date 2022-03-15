@@ -21,10 +21,6 @@
   background-color: red;
 }
 
-#buttons > button {
-  padding: 2.5vh;
-}
-
 .com {
   height: 200px;
   width: 135px;
@@ -38,18 +34,19 @@
 }
 
 body {
-  /* background-image: url("./imgs/Background.jpg"); */
   background-color: black;
 }
 
 #buttons {
   display: flex;
-  justify-content: center;
-  padding: 5vh;
+  padding: 1vh;
+  justify-content: space-evenly;
+  width: 30vh;
+  margin-left: 10vh;
+  border-right: 5px solid silver;
 }
 
 button {
-  margin: 2vh;
   background-color: lightgreen;
   font-weight: 700;
   font-family: Arial, Helvetica, sans-serif;
@@ -100,25 +97,45 @@ button {
 }
 
 #console {
-  background-color: lightgreen;
-  position: absolute;
+  background-color: slategray;
   display: flex;
-  top: 5%;
-  left: 5%;
+  position: absolute;
   flex-direction: column;
   font-size: 20px;
   align-content: center;
-  height: 30vh;
-  width: 30vh;
-  padding: 5vh;
+  padding: 2vh;
   font-weight: 700;
-  border-radius: 5px;
   font-family: "Trebuchet MS", Arial, sans-serif;
   z-index: 1;
-  border: 2px solid grey;
   overflow-y: auto;
   overflow-x: hidden;
-  line-height: 200%;
+  width: 20vh;
+  height: 30vh;
+  top: 70%;
+  left: 0%;
+  border: 5px solid black;
+}
+
+#console-header {
+  position: absolute;
+  font-weight: 900;
+  font-style: italic;
+  color: white;
+  background-color: black;
+  width: 23vh;
+  top: 65%;
+  margin-right: 5vh;
+  padding: 1vh;
+  margin: 0;
+  margin-left: -1vh;
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 5px 5px 0px 0px;
+}
+
+#poker-cat-small {
+  height: 2vh;
+  width: 2vh;
 }
 
 #splash {
@@ -166,28 +183,16 @@ button {
 }
 
 #chips-container {
-  position: absolute;
   display: flex;
-  top: 5%;
-  left: 70%;
   flex-direction: column;
-  justify-content: space-between;
   font-size: 30px;
-  align-content: center;
-  background-color: transparent;
-  height: 60vh;
-  width: 30vh;
-  padding: 5vh;
   font-weight: 700;
-  border-radius: 5px;
   font-family: "Trebuchet MS", Arial, sans-serif;
   z-index: 1;
+  margin-left: 20vh;
 }
 
 #console-current-pot {
-  position: absolute;
-  top: 28%;
-  left: 45%;
   font-size: 20px;
   background-color: lightgreen;
   width: 15vh;
@@ -198,12 +203,10 @@ button {
 }
 
 #console-boss-chips {
-  margin-top: 5vh;
   padding: 2vh;
   border-radius: 5px;
   background-color: lightgreen;
   border: 2px solid grey;
-  width: 30vh;
   font-size: 20px;
   text-align: center;
 }
@@ -218,9 +221,6 @@ button {
 }
 
 #console-hand {
-  position: absolute;
-  top: 52%;
-  left: 45%;
   font-size: 20px;
   background-color: lightgreen;
   border-radius: 5px;
@@ -231,10 +231,18 @@ button {
   text-align: center;
 }
 
+#check, #call, #raise, #fold {
+  height: 5vh;
+  padding: 1vh;
+  margin: 1vh;
+  align-self: center;
+}
+
 #raise-amount {
   font-weight: 900;
   text-align: center;
   padding: 2vh;
+  color: white;
 }
 
 #raise-amount-container {
@@ -242,4 +250,23 @@ button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#navbar {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  background-color: black;
+  margin-top: 5vh;
+  top: 75%;
+  left: 20%;
+  width: 100%;
+}
+
+#action-buttons {
+  position: absolute;
+  color: white;
+  font-size: 30px;
+  font-weight: 900;
+  padding: 1vh;
 }
