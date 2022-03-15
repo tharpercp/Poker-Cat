@@ -41,9 +41,8 @@ body {
   display: flex;
   padding: 1vh;
   justify-content: space-evenly;
-  width: 30vh;
+  width: 40vh;
   margin-left: 10vh;
-  border-right: 5px solid silver;
 }
 
 button {
@@ -97,7 +96,7 @@ button {
 }
 
 #console {
-  background-color: slategray;
+  background-color: white;
   display: flex;
   position: absolute;
   flex-direction: column;
@@ -158,7 +157,7 @@ button {
 #splash-container {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 200%;
   background-color: black;
   z-index: 9999;
   display: flex;
@@ -193,42 +192,50 @@ button {
 }
 
 #console-current-pot {
-  font-size: 20px;
-  background-color: lightgreen;
-  width: 15vh;
-  border-radius: 5px;
   padding: 1vh;
+  border-radius: 5px;
+  background-color: white;
   border: 2px solid grey;
+  font-size: 15px;
+  height: 3vh;
   text-align: center;
+  margin: 1vh;
 }
 
 #console-boss-chips {
-  padding: 2vh;
+  padding: 1vh;
   border-radius: 5px;
-  background-color: lightgreen;
+  background-color: white;
   border: 2px solid grey;
-  font-size: 20px;
+  font-size: 15px;
+  height: 3vh;
   text-align: center;
+  margin: 1vh;
 }
 
 #console-your-chips {
-  padding: 2vh;
+  padding: 1vh;
   border-radius: 5px;
+  background-color: white;
   border: 2px solid grey;
-  font-size: 20px;
+  font-size: 15px;
+  height: 3vh;
   text-align: center;
-  background-color: lightgreen;
+  margin: 1vh;
 }
 
 #console-hand {
-  font-size: 20px;
-  background-color: lightgreen;
-  border-radius: 5px;
+  font-family: "Trebuchet MS", Arial, sans-serif;
   padding: 1vh;
+  border-radius: 5px;
+  background-color: white;
   border: 2px solid grey;
-  z-index: 98;
-  width: 15vh;
+  font-size: 15px;
+  height: 2vh;
   text-align: center;
+  margin: 1vh;
+  font-weight: 900;
+  width: 10vh;
 }
 
 #check, #call, #raise, #fold {
@@ -258,15 +265,28 @@ button {
   position: fixed;
   background-color: black;
   margin-top: 5vh;
-  top: 75%;
-  left: 20%;
   width: 100%;
 }
 
 #action-buttons {
-  position: absolute;
+  font-family: "Trebuchet MS", Arial, sans-serif;
   color: white;
   font-size: 30px;
   font-weight: 900;
   padding: 1vh;
+  margin: 0 auto;
+}
+
+#empty-div {
+  width: 5vh;
+}
+
+#chip-counts {
+  display: flex;
+  flex-direction: row;
+}
+
+#hand-strength {
+  width: 30vh;
+  margin: 0 auto;
 }
