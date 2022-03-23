@@ -289,7 +289,7 @@ class Game{
             this.communityCards = flopArray;
             this.communityCards.forEach((card) => hand.push(card));
             this.player.hand.forEach((card) => hand.push(card));
-            console.log(hand);
+            hand = hand.flat();
             this.displayHand(hand);
             document.getElementById("1").src="./src/imgs/Cards/" + `${flopArray[0]}` + ".JPG";
             document.getElementById("2").src="./src/imgs/Cards/" + `${flopArray[1]}` + ".JPG";
@@ -304,6 +304,7 @@ class Game{
             this.status = "turn";
             const turnCard = this.deal(1);
             this.communityCards.push(turnCard);
+            this.communityCards = this.communityCards.flat();
             document.getElementById("4").src ="./src/imgs/Cards/" + `${turnCard[0]}` + ".JPG";
 
         } else {
@@ -316,6 +317,7 @@ class Game{
             this.status = "river";
             const riverCard = this.deal(1)
             this.communityCards.push(riverCard)
+            this.communityCards = this.communityCards.flat();
             document.getElementById("5").src ="./src/imgs/Cards/" + `${riverCard[0]}` + ".JPG";
         } else {
             return null;

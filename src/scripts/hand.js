@@ -60,7 +60,7 @@ class Hand {
         if (check[0] === 1) {
             check.push(14);
         }
-        let inARow = 1;
+        let inARow = 0;
         for (let i = 0; i < check.length; i++) {
             if (i === 0) {
                 if (check[i] === check[i + 1] - 1) {
@@ -84,6 +84,7 @@ class Hand {
     pairsCheck(cardInstances) {
         const key = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0, 11: 0, 12: 0, 13: 0};
         const cardValues = this.cardValues(cardInstances);
+        console.log(cardValues);
         cardValues.forEach((card) => key[card] += 1)
         const counts = (Object.values(key));
         const pairsCount = counts.sort((a,b)=>a-b);

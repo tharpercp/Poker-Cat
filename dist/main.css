@@ -141,7 +141,6 @@ button {
   max-height: 50vh;
   max-width: 50vh;
   margin: 0 auto;
-  margin-top: 5vh;
 }
 
 #start {
@@ -163,6 +162,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow-y: hidden;
 }
 
 #splash-title {
@@ -171,6 +171,7 @@ button {
   padding: 5vh;
   font-family: "Montserrat";
   font-size: 100px;
+  margin-top: -100vh;
 }
 
 #splash-description {
