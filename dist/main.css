@@ -115,14 +115,13 @@ button {
 }
 
 #console-two {
-  background-color: white;
+  background: lightgreen;
   display: grid;
-  grid-template-columns: 10vh 10vh;
+  grid-template-columns: 8vh 8vh;
   position: fixed;
-  flex-direction: column;
   font-size: 20px;
+  justify-content: center;
   align-content: center;
-  padding: 2vh;
   font-weight: 700;
   font-family: "Trebuchet MS", Arial, sans-serif;
   z-index: 1;
@@ -247,11 +246,8 @@ button {
   background-color: white;
   border: 2px solid grey;
   font-size: 15px;
-  height: 2vh;
   text-align: center;
-  margin: 1vh;
   font-weight: 900;
-  width: 10vh;
 }
 
 #check, #call, #raise, #fold {
@@ -293,7 +289,16 @@ button {
   font-size: 30px;
   font-weight: 900;
   margin: 0 auto;
-  margin-top: -1vh;
+  margin-top: -2vh;
+  color: white;
+}
+
+#console-two-title {
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  font-size: 30px;
+  font-weight: 900;
+  margin: 0 auto;
+  color: black;
 }
 
 #chip-counts {
